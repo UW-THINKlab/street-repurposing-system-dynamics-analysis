@@ -1,0 +1,3040 @@
+{UTF-8}
+ASU NMT Deterioration=
+	"ASU NMT Deterioration On[1]/Off[0]" * ASU NMT LaneMiles / ASU NMT Lifespan
+	~	
+	~		|
+
+"ASU NMT Deterioration On[1]/Off[0]"=
+	0.1
+	~	
+	~		|
+
+"MPS Drive-SR-Multiplier"=
+	1.26
+	~	 [1,1.5,0.01]
+	~	Baseline 1.26
+	|
+
+MPS Transit Commercial=
+	MS Transit Multiplier * PS Commercial Multiplier * "MPS Transit-C-Multiplier" * (1 +\
+		 EXP( -("SensMPS-T-C ASU-Commercial"*(ASU Commercial LaneMiles-"ASU-Commercial LFS"
+	) + "SensMPS-T-C Congestion"
+	*(Congestion
+	-CongestionLFS) + "SensMPS-T-C TQR"*("Transit Quality and Reliability (TQR)"-TQR LFS\
+		) + "SensMPS-T-C VRM"
+	*("Effective Transit Service Capacity (VRM)"
+	-TrVRM LFS)
+	+"Sens MS-T TransitFare"*(Avg Fare per Transit Trip-"MS-T TransitFareLFS")
+	+"SensMS-T ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS")
+	)))^-1
+	~	
+	~		|
+
+"MPS Transit-C-Multiplier"=
+	0.93
+	~	 [0.5,1.2,0.01]
+	~	Baseline 0.93
+	|
+
+MPS Drive SocRec=
+	MS Drive Multiplier * PS SocRec Multiplier * "MPS Drive-SR-Multiplier" * (1 + EXP( -\
+		("SensMPS-D-SR Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+"MPS NMT-C-Multiplier"=
+	0.63
+	~	 [0.1,1,0.01]
+	~	Baseline 0.63
+	|
+
+MPS NMT Commercial=
+	MS NMT Multiplier * PS Commercial Multiplier * "MPS NMT-C-Multiplier" * (1 + EXP( -(\
+		"SensMPS-N-C ASU-Commercial"*(ASU Commercial LaneMiles-"ASU-Commercial LFS"
+	) + "SensMPS-N-C ASU-NMT"
+	*(ASU NMT LaneMiles
+	-"ASU-NMT LFS") + "SensMPS-N-C Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+"MPS Drive-Home-Multiplier"=
+	1.09
+	~	 [1,1.5,0.01]
+	~	Baseline 1.09
+	|
+
+MPS NMT WorkSchool=
+	MS NMT Multiplier * PS WorkSchool Multiplier * "MPS NMT-WS-Multiplier" * (1 + EXP( -\
+		("SensMPS-N-WS ASU-NMT"*(ASU NMT LaneMiles-"ASU-NMT LFS") + "SensMPS-N-WS Congestion"
+	*(Congestion
+	-CongestionLFS
+	))
+	))^-1
+	~	
+	~		|
+
+MPS Drive Home=
+	MS Drive Multiplier * PS Home Multiplier * "MPS Drive-Home-Multiplier" * (1 + EXP( -\
+		("SensMPS-D-H Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+"MPS NMT-WS-Multiplier"=
+	0.63
+	~	 [0.5,1.2,0.01]
+	~	Baseline 0.63
+	|
+
+"MPS Transit-WS-Multiplier"=
+	1.75
+	~	 [0.01,2,0.01]
+	~	Baseline 1.75
+	|
+
+"MPS Transit-SR-Multiplier"=
+	0.52
+	~	 [0.1,1,0.01]
+	~	Baseline 0.52
+	|
+
+MPS Drive WorkSchool=
+	MS Drive Multiplier * PS WorkSchool Multiplier * "MPS Drive-WS-Multiplier" * (1 + EXP\
+		( -("SensMPS-D-WS Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+"MPS NMT-Home-Multiplier"=
+	0.48
+	~	 [0.01,1,0.01]
+	~	Baseline 0.8
+	|
+
+"MPS Drive-C-Multiplier"=
+	1.16
+	~	 [0.8,1.5,0.01]
+	~	Baseline 1.16
+	|
+
+"MPS Drive-EE-Multiplier"=
+	1.52
+	~	 [0.5,2,0.01]
+	~	Baseline 1.52
+	|
+
+"MPS Drive-WS-Multiplier"=
+	1.16
+	~	 [0.8,1.3,0.01]
+	~	Baseline 1.16
+	|
+
+MPS Transit ErrandEscort=
+	MS Transit Multiplier * PS ErrandEscort Multiplier * "MPS Transit-EE-Multiplier" * (\
+		1 + EXP( -("SensMPS-T-EE Congestion"*(Congestion-CongestionLFS) +
+	 "SensMPS-T-EE TQR"*("Transit Quality and Reliability (TQR)"
+	-TQR LFS) + "SensMPS-T-EE VRM"*("Effective Transit Service Capacity (VRM)"-TrVRM LFS\
+		) + "SensMPS-T-C ASU-Commercial"*(ASU Commercial LaneMiles
+	-"ASU-Commercial LFS") + "SensMPS-T-SR ASU-SocRec" * (ASU SocRec LaneMiles-"ASU-SocRec LFS"\
+		)
+	+"Sens MS-T TransitFare"*(Avg Fare per Transit Trip-"MS-T TransitFareLFS")
+	+"SensMS-T ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS")
+	)))^-1
+	~	
+	~		|
+
+"MPS Transit-EE-Multiplier"=
+	0.84
+	~	 [0.05,2,0.01]
+	~	Baseline 0.84
+	|
+
+MPS NMT ErrandEscort=
+	MS NMT Multiplier * PS ErrandEscort Multiplier * "MPS NMT-EE-Multiplier" * (1 + EXP(\
+		 -("SensMPS-N-EE ASU-Commercial"*(ASU Commercial LaneMiles-"ASU-Commercial LFS"
+	) + "SensMPS-N-EE ASU-NMT"
+	*(ASU NMT LaneMiles
+	-"ASU-NMT LFS") + "SensMPS-N-EE ASU-SocRec"*(ASU SocRec LaneMiles-"ASU-SocRec LFS") \
+		+ "SensMPS-N-EE Congestion"*(Congestion
+	-CongestionLFS))))^-1
+	~	
+	~		|
+
+MPS Drive Commercial=
+	MS Drive Multiplier * PS Commercial Multiplier * "MPS Drive-C-Multiplier" * (1 + EXP\
+		( -("SensMPS-D-C Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+MPS NMT Home=
+	MS NMT Multiplier * PS Home Multiplier * "MPS NMT-Home-Multiplier" * (1 + EXP( -("SensMPS-N-H ASU-NMT"\
+		*(ASU NMT LaneMiles-"ASU-NMT LFS") + "SensMPS-N-H Congestion"
+	*(Congestion
+	-CongestionLFS
+	))))
+	^-1
+	~	
+	~		|
+
+MPS Drive ErrandEscort=
+	MS Drive Multiplier * PS ErrandEscort Multiplier * "MPS Drive-EE-Multiplier" * (1 + \
+		EXP( -("SensMPS-D-EE Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+MPS NMT SocRec=
+	MS NMT Multiplier * PS SocRec Multiplier * "MPS NMT-SR-Multiplier" * (1 + EXP( -("SensMPS-N-SR ASU-NMT"\
+		*(ASU NMT LaneMiles-"ASU-NMT LFS") + "SensMPS-N-SR ASU-SocRec"
+	*(ASU SocRec LaneMiles-
+	"ASU-SocRec LFS") + "SensMPS-N-SR Congestion"*(Congestion-CongestionLFS))))^-1
+	~	
+	~		|
+
+MPS Transit WorkSchool=
+	MS Transit Multiplier * PS WorkSchool Multiplier * "MPS Transit-WS-Multiplier" * (1 \
+		+ EXP( -("SensMPS-T-WS Congestion"*(Congestion-CongestionLFS) + "SensMPS-T-WS TQR"
+	*("Transit Quality and Reliability (TQR)"
+	-TQR LFS) + "SensMPS-T-WS VRM"*("Effective Transit Service Capacity (VRM)"-TrVRM LFS\
+		)
+	+"Sens MS-T TransitFare"*(Avg Fare per Transit Trip-"MS-T TransitFareLFS")
+	+"SensMS-T ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS")
+	)))^-1
+	~	
+	~		|
+
+MPS Transit Home=
+	MS Transit Multiplier * PS Home Multiplier * "MPS Transit-Home-Multiplier" * (1 + EXP\
+		( -("Sens-MPS-T-H TQR"*("Transit Quality and Reliability (TQR)"-TQR LFS
+	) 
+	+ "SensMPS-T-H Congestion"*(Congestion-CongestionLFS) 
+	+"SensMPS-T-H VRM"*("Effective Transit Service Capacity (VRM)"-TrVRM LFS)
+	+"Sens MS-T TransitFare"*(Avg Fare per Transit Trip-"MS-T TransitFareLFS")
+	+"SensMS-T ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS")
+	)))^-1
+	~	
+	~		|
+
+"MPS Transit-Home-Multiplier"=
+	1.18
+	~	 [1,1.4,0.01]
+	~	Baseline 1.18
+	|
+
+"MPS NMT-EE-Multiplier"=
+	0.24
+	~	 [0.02,1,0.01]
+	~	Baseline 0.24
+	|
+
+"MPS NMT-SR-Multiplier"=
+	0.92
+	~	 [0.2,2,0.01]
+	~	Baseline 0.92
+	|
+
+MPS Transit SocRec=
+	MS Transit Multiplier * PS SocRec Multiplier * "MPS Transit-SR-Multiplier" * (1 + EXP\
+		( -("SensMPS-T-SR ASU-SocRec"*(ASU SocRec LaneMiles-"ASU-SocRec LFS"
+	) + "SensMPS-T-SR Congestion"
+	*(Congestion-CongestionLFS
+	) + "SensMPS-T-SR TQR"*("Transit Quality and Reliability (TQR)"-TQR LFS) + "SensMPS-T-SR VRM"\
+		*("Effective Transit Service Capacity (VRM)"
+	-TrVRM LFS)
+	+"Sens MS-T TransitFare"*(Avg Fare per Transit Trip-"MS-T TransitFareLFS")
+	+"SensMS-T ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS")
+	)))^-1
+	~	
+	~		|
+
+PS ErrandEscort Multiplier=
+	1.1
+	~	 [1,1.5,0.01]
+	~		|
+
+MS Drive Multiplier=
+	0.51
+	~	 [0.05,2,0.05]
+	~	Seattle baseline 0.51
+	|
+
+PS WorkSchool Multiplier=
+	1
+	~	 [0.05,2,0.05]
+	~		|
+
+Regional Population=
+	Baseline Regional Population * ((1 + (Population Growth Rate/5200)) ^ Time)
+	~	
+	~		|
+
+Drive VMT per Capita=
+	Total Drive VMT/Regional Population
+	~	
+	~		|
+
+Baseline Regional Population=
+	753291
+	~	
+	~		|
+
+"D-H VMT"=
+	"NumTrips (AllModes)" * MPS Drive Home Normalised * "D-H Med-Trip-Miles"
+	~	
+	~		|
+
+"NumTrips (AllModes)"=
+	("Baseline NumTrips (AllModes)" * ( 1 + (Population Growth Rate/5200) ) ^ Time) * Induced Demand Factor
+	~	
+	~	Negative of TravelTime elasticity is used since "Congestion" is a speed metric
+		A travel time elasticity of -0.5 would mean that if speeds increase by \
+		20%, traffic volumes increase by 10%.
+	|
+
+"D-SR VMT"=
+	"NumTrips (AllModes)" * MPS Drive SocRec Normalised * "D-SR Med-Trip-Miles"
+	~	
+	~		|
+
+"D-WS Med-Trip-Miles"=
+	2.73
+	~	
+	~	Baseline is 2.73
+	|
+
+"D-WS VMT"=
+	"NumTrips (AllModes)" * MPS Drive WorkSchool Normalised * "D-WS Med-Trip-Miles"
+	~	
+	~		|
+
+MPS Drive SocRec Normalised=
+	MPS Drive SocRec/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS Drive WorkSchool Normalised=
+	MPS Drive WorkSchool/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS NMT Commercial Normalised=
+	MPS NMT Commercial/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS NMT ErrandEscort Normalised=
+	MPS NMT ErrandEscort/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS NMT Home Normalised=
+	MPS NMT Home/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+Induced Demand Factor=
+	1 + (-TrafficVolume TravelTime Elasticity) * ( ((1-Congestion) - (1-Previous Congestion\
+		)) / (1-Previous Congestion ))
+	~	
+	~		|
+
+MPS NMT WorkSchool Normalised=
+	MPS NMT WorkSchool/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS Transit Commercial Normalised=
+	MPS Transit Commercial/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+"D-EE Med-Trip-Miles"=
+	1.97
+	~	
+	~	Baseline is 1.97
+	|
+
+MPS Transit ErrandEscort Normalised=
+	MPS Transit ErrandEscort/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+ModeShare NMT UnNormalized=
+	(MPS NMT Commercial+MPS NMT ErrandEscort+MPS NMT Home+MPS NMT SocRec+MPS NMT WorkSchool\
+		)
+	~	
+	~		|
+
+MPS Transit Home Normalised=
+	MPS Transit Home/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+ModeShare Transit UnNormalized=
+	SIMULTANEOUS( (MPS Transit Commercial+MPS Transit ErrandEscort+MPS Transit Home+MPS Transit SocRec
+	+MPS Transit WorkSchool)
+	
+	, 0.0617)
+	~	
+	~		|
+
+"D-C VMT"=
+	"NumTrips (AllModes)" * MPS Drive Commercial Normalised * "D-C Med-Trip-Miles"
+	~	
+	~		|
+
+MPS Transit SocRec Normalised=
+	MPS Transit SocRec/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS Drive Commercial Normalised=
+	MPS Drive Commercial/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+"D-H Med-Trip-Miles"=
+	2.16
+	~	
+	~	Baseline is 2.16
+	|
+
+MPS Drive ErrandEscort Normalised=
+	MPS Drive ErrandEscort/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+"D-SR Med-Trip-Miles"=
+	2.62
+	~	
+	~	Baseline is 2.62
+	|
+
+MPS Drive Home Normalised=
+	MPS Drive Home/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+Total Drive VMT=
+	"D-C VMT" + "D-EE VMT" + "D-H VMT" + "D-SR VMT" + "D-WS VMT"
+	~	
+	~		|
+
+"D-EE VMT"=
+	"NumTrips (AllModes)" * MPS Drive ErrandEscort Normalised * "D-EE Med-Trip-Miles"
+	~	
+	~		|
+
+"D-C Med-Trip-Miles"=
+	1.77
+	~	
+	~	Baseline is 1.77
+	|
+
+MPS NMT SocRec Normalised=
+	MPS NMT SocRec/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+MPS Transit WorkSchool Normalised=
+	MPS Transit WorkSchool/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+Previous Congestion=
+	DELAY FIXED(Congestion, 2*TIME STEP, Baseline Congestion)
+	~	
+	~		|
+
+TrafficVolume TravelTime Elasticity=
+	-0.57
+	~	
+	~	From Goodwin (1996), via https://www.vtpi.org/elasticities.pdf, Table 29
+		Value used is for urban roads, long-term elasticity
+	|
+
+Baseline Congestion=
+	0.245745
+	~	 [0,1,0.001]
+	~	Baseline is 0.245745 (from the TRB 2025 model that didn't have the \
+		congestion feedback into number of trips)
+	|
+
+ASU Transit PublicDemand=
+	(1 + EXP( -("SensPD-T ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS") + "SensPD-T MS-NMT"\
+		*(ModeShare NMT-ModeNMTLFS
+	) + "SensPD-T MS-Transit"*(ModeShare Transit-ModeTransitLFS) + "SensPD-T TQR"
+	*("Transit Quality and Reliability (TQR)"-TQR LFS))))^-1
+	~	
+	~		|
+
+"NumVehicles (Transit)"=
+	(FracTransitTripsbyBus * "NumTrips (Transit)" / AvgTripsPerBus) * (1 - Frac Buses in TransitLane\
+		)
+	~	
+	~		|
+
+FracTransitTripsbyBus=
+	0.85
+	~	 [0.5,1,0.01]
+	~	Baseline is 0.85
+	|
+
+ASU SocRec PublicDemand=
+	(1 + EXP( -("SensPD-SR ASU-SocRec"*(ASU SocRec LaneMiles-"ASU-SocRec LFS") + "SensPD-SR PS-SocRec"\
+		*(PurposeShare SocRec-PurposeSocRecLFS))))^-1
+	~	
+	~		|
+
+ASU NMT PublicDemand=
+	(1 + EXP( -("SensPD-N ASU-NMT" * (ASU NMT LaneMiles - "ASU-NMT LFS") + "Sens PD-N MS-NMT"\
+		 * (ModeShare NMT - ModeNMTLFS) + "SensPD-N MS-Transit" * (ModeShare Transit - ModeTransitLFS\
+		)))
+	) ^ -1
+	~	
+	~		|
+
+ASU Commercial PublicDemand=
+	(1 + EXP( -("SensPD-C ASU-Commercial" * (ASU Commercial LaneMiles - "ASU-Commercial LFS"\
+		) + "SensPD-C PS-Commercial"
+	 * (PurposeShare Commercial - PurposeCommercialLFS)) )) ^ -1
+	~	
+	~		|
+
+ASU Commercial FundingCostRatio=
+	6.65
+	~	 [0,1000,0.01]
+	~	Baseline is 6.65
+	|
+
+ASU NMT FundingCostRatio=
+	0.122
+	~	 [0,100,0.01]
+	~	Baseline is 0.122
+	|
+
+ASU Commercial Construction=
+	DELAY FIXED( ASU Commercial PublicDemand * (ASU Commercial FundingCostRatio) * ASU Commercial AvgProjectMileage
+	, ASU Commercial ConstructionTime, 0)
+	~	
+	~		|
+
+"Effective Transit Service Capacity (VRM)"=
+	SIMULTANEOUS( MIN("Transit Service Capacity Multiplier (TSCM)" * Previous VRM, "Transit Service Capacity Limit (VRM)"\
+		), 800000)
+	~	
+	~		|
+
+ASU Transit Construction=
+	DELAY FIXED( ASU Transit PublicDemand * (ASU Transit FundingCostRatio) * ASU Transit AvgProjectMileage
+	, ASU Transit ConstructionTime ,0)
+	~	
+	~		|
+
+ASU NMT Construction=
+	DELAY FIXED( ASU NMT PublicDemand * (ASU NMT FundingCostRatio) * ASU NMT AvgProjectMileage\
+		, ASU NMT ConstructionTime
+	, 0)
+	~	
+	~		|
+
+ASU SocRec Construction=
+	DELAY FIXED( ASU SocRec PublicDemand * (ASU SocRec FundingCostRatio) * ASU SocRec AvgProjectMileage
+	, ASU SocRec ConstructionTime ,0)
+	~	
+	~		|
+
+ASU Transit FundingCostRatio=
+	0.0069
+	~	 [0,10,0.0001]
+	~	Baseline is 0.0069
+	|
+
+ASU SocRec FundingCostRatio=
+	0.279
+	~	 [0,500,0.01]
+	~	Baseline is 0.279
+	|
+
+"SensMS-T ASU-Transit"=
+	0.03
+	~	 [0.01,0.08,0.005]
+	~		|
+
+AvgTripsPerBus=
+	15
+	~	 [1,60,1]
+	~		|
+
+"Transit Quality and Reliability (TQR)"=
+	TQR Multiplier * (1 + EXP( -("SensTQR-ASUTransit"*(ASU Transit LaneMiles-"ASU-Transit LFS"\
+		) + "SensTQR-Congestion"*(Congestion
+	-TQR CongestionLFS)
+	 + "SensTQR-OE"*(OE per VRM-OEperVRM LFS) + "SensTQR-VRM"*("Effective Transit Service Capacity (VRM)"\
+		-TrVRM LFS))))^-1
+	~	
+	~		|
+
+TQR CongestionLFS=
+	0.9
+	~	 [0.5,1,0.05]
+	~		|
+
+PurposeCommercialLFS=
+	0.15
+	~	 [0,0.3,0.01]
+	~	Baseline is 0.15
+	|
+
+PurposeSocRecLFS=
+	0.08
+	~	 [0,0.2,0.01]
+	~	Baseline is 0.08
+	|
+
+ModeNMTLFS=
+	0.07
+	~	 [-0.1,0.5,0.01]
+	~	Baseline is 0.07
+	|
+
+TQR LFS=
+	0.5
+	~	 [0,1,0.1]
+	~	Baseline is 0.5
+	|
+
+ModeTransitLFS=
+	0.04
+	~	 [-0.1,0.1,0.01]
+	~	Baseline is 0.04
+	|
+
+TQR Multiplier=
+	0.8
+	~	 [0,2,0.1]
+	~		|
+
+"Sens MS-T TransitFare"=
+	-0.4
+	~	 [-2,-0.1,0.1]
+	~	Baseline is -0.4
+	|
+
+"MS-T TransitFareLFS"=
+	3
+	~	 [2,4,0.1]
+	~	Baseline is 3
+	|
+
+"ASU Transit Deterioration On[1]/Off[0]"=
+	0.2
+	~	 [0,1,0.1]
+	~		|
+
+Transit Occupancy=
+	"NumTrips (Transit)" / ("Uneven Transit Spatio-Temporal Distribution" * "Effective Transit Service Capacity (Trips)"
+	)
+	~	
+	~		|
+
+PS Commercial Multiplier=
+	0.8
+	~	 [0.05,2,0.05]
+	~	Baseline is 1
+	|
+
+PS Home Multiplier=
+	1.64
+	~	 [1,3,0.05]
+	~	Baseline is 1.7
+	|
+
+"Uneven Transit Spatio-Temporal Distribution"=
+	1
+	~	 [0.001,1,0.0001]
+	~		|
+
+MS NMT Multiplier=
+	0.435
+	~	 [0.1,2,0.005]
+	~	Baseline is 0.435
+	|
+
+ASU Transit Deterioration=
+	"ASU Transit Deterioration On[1]/Off[0]"* ASU Transit LaneMiles / ASU Transit Lifespan
+	~	
+	~		|
+
+MS Transit Multiplier=
+	0.039
+	~	 [0.001,1,0.001]
+	~	Baseline is 0.039
+	|
+
+Aggregate Roadway Flow Speed=
+	SIMULTANEOUS( (Nominal Roadway Flow Speed / Effective Roadway LaneMiles) * (Traffic Calming Factor\
+		 * Roadway LaneMiles with ASU Calming + (Effective Roadway LaneMiles - Roadway LaneMiles with ASU Calming\
+		)), 25)
+	~	
+	~		|
+
+ASU Commercial AvgProjectMileage=
+	0.004
+	~	 [0.002,0.02,0.001]
+	~	Baseline is 0.004
+	|
+
+ASU Commercial BaseLaneMiles=
+	2.4
+	~	 [0,4,0.1]
+	~	Baseline is 2.4
+	|
+
+ASU Commercial ConstructionTime=
+	4
+	~	 [1,26,1]
+	~	Baseline is 4
+	|
+
+ASU Commercial Deterioration=
+	ASU Commercial LaneMiles / ASU Commercial Lifespan
+	~	
+	~		|
+
+ASU Commercial LaneMiles= INTEG (
+	ASU Commercial Construction-ASU Commercial Deterioration,
+		ASU Commercial BaseLaneMiles)
+	~	
+	~		|
+
+ASU Commercial Lifespan=
+	156
+	~	 [1,260,1]
+	~	Baseline is 156
+	|
+
+ASU NMT AvgProjectMileage=
+	0.8
+	~	 [0.1,3,0.1]
+	~	Baseline is 0.8
+	|
+
+ASU NMT BaseLaneMiles=
+	100
+	~	 [0,20,1]
+	~	Baseline is 6
+	|
+
+ASU NMT ConstructionTime=
+	4
+	~	 [1,13,1]
+	~	Baseline is 4
+	|
+
+ASU NMT LaneMiles= INTEG (
+	ASU NMT Construction-ASU NMT Deterioration,
+		ASU NMT BaseLaneMiles)
+	~	
+	~		|
+
+ASU NMT Lifespan=
+	104
+	~	 [1,520,1]
+	~	Baseline is 104
+	|
+
+ASU SocRec AvgProjectMileage=
+	0.004
+	~	 [0.002,0.02,0.001]
+	~	Baseline is 0.004
+	|
+
+ASU SocRec BaseLaneMiles=
+	0.1
+	~	 [0,2,0.1]
+	~	Baseline is 0.1
+	|
+
+ASU SocRec ConstructionTime=
+	8
+	~	 [2,26,2]
+	~	Baseline is 8
+	|
+
+ASU SocRec Deterioration=
+	ASU SocRec LaneMiles / ASU SocRec Lifespan
+	~	
+	~		|
+
+ASU SocRec LaneMiles= INTEG (
+	ASU SocRec Construction-ASU SocRec Deterioration,
+		ASU SocRec BaseLaneMiles)
+	~	
+	~		|
+
+ASU SocRec Lifespan=
+	104
+	~	 [1,260,1]
+	~	Baseline is 104
+	|
+
+ASU Total LaneMiles=
+	ASU Commercial LaneMiles+ASU NMT LaneMiles+ASU SocRec LaneMiles+ASU Transit LaneMiles
+	~	
+	~		|
+
+ASU Transit AvgProjectMileage=
+	2
+	~	 [0.2,5,0.2]
+	~	Baseline is 2
+	|
+
+ASU Transit BaseLaneMiles=
+	35
+	~	 [10,400,1]
+	~	Baseline is 35
+	|
+
+"SensMPS-N-H Congestion"=
+	0.5
+	~	 [0.2,2,0.05]
+	~	Baseline is 0.5
+	|
+
+ASU Transit ConstructionTime=
+	8
+	~	 [1,52,1]
+	~	Baseline is 8
+	|
+
+ASU Transit LaneMiles= INTEG (
+	ASU Transit Construction-ASU Transit Deterioration,
+		ASU Transit BaseLaneMiles)
+	~	
+	~		|
+
+ASU Transit Lifespan=
+	520
+	~	 [52,520,26]
+	~	Baseline is 520
+	|
+
+"ASU-Commercial LFS"=
+	2.5
+	~	 [0.5,6,0.1]
+	~	Baseline is 2.5
+	|
+
+"ASU-NMT LFS"=
+	100
+	~	 [1,10,0.1]
+	~	Baseline is 3
+	|
+
+"ASU-SocRec LFS"=
+	0.2
+	~	 [-0.2,2,0.1]
+	~	Baseline is 0.2
+	|
+
+"ASU-Transit LFS"=
+	25
+	~	 [20,200,5]
+	~	Baseline is 25
+	|
+
+Avg Fare per Transit Trip=
+	1.2
+	~	 [0,5,0.1]
+	~	Baseline is 1.2
+	|
+
+"Avg NumTrips(Pax) per Drive Vehicle"=
+	1.6668
+	~	 [1,3,0.01]
+	~	Baseline is 1.6668 (PSRC HTS 2019)
+	|
+
+"Avg Pax-Miles per Trip"=
+	4
+	~	 [1,20,0.5]
+	~	Baseline is 4
+	|
+
+"Avg Trips(Pax) Capacity per Transit Vehicle"=
+	90
+	~	 [30,120,5]
+	~	Baseline is 90
+	|
+
+"Baseline NumTrips (AllModes)"=
+	1.85181e+07
+	~	
+	~	Baseline is 71,606,300 (annual) - from Minda's calculation which was King County O/D \
+		trips by Seattle residents < 50 miles
+		Baseline is 18,518,137 (weekly) - Jeremy's calculation of Seattle PUMA10 \
+		O/D trips <= 50 miles
+	|
+
+Baseline Roadway LaneMiles=
+	3952
+	~	
+	~	Baseline is 3952
+	|
+
+"Baseline Transit Service Capacity (VRM)"=
+	800000
+	~	
+	~	Baseline is 800000
+	|
+
+Congestion=
+	1 - (Aggregate Roadway Flow Speed / "Roadway Free-Flow Reference Speed")
+	~	
+	~		|
+
+Effective Roadway LaneMiles=
+	Baseline Roadway LaneMiles - (Frac ASU Removing Travel Lane * ASU Total LaneMiles)
+	~	
+	~		|
+
+"Effective Transit Service Capacity (Trips)"=
+	"Effective Transit Service Capacity (VRM)" * "Avg Trips(Pax) Capacity per Transit Vehicle"\
+		 / "Avg Pax-Miles per Trip"
+	~	
+	~		|
+
+Federal and State Grants=
+	3e+06
+	~	 [500000,6e+06,100000]
+	~	Baseline is 3,000,000
+	|
+
+Frac ASU Removing Travel Lane=
+	0.9
+	~	 [0.5,0.99,0.01]
+	~	Baseline is 0.9
+	|
+
+Frac Buses in TransitLane=
+	MIN((1 + EXP( -("SensFracBusInTransitLane ASU-Transit"*(ASU Transit LaneMiles-"ASU-Transit LFS"\
+		))))^-1, FracBusInTrLane MaxLimit)
+	~	
+	~		|
+
+"SensPD-N Congestion"=
+	-6
+	~	 [-10,-2,0.1]
+	~		|
+
+Frac TrOverflow as Drive Trips=
+	0.5
+	~	 [0,1,0.02]
+	~	Baseline is 0.5
+	|
+
+FracBusInTrLane MaxLimit=
+	0.5
+	~	 [0,1,0.01]
+	~	Baseline is 0.5
+	|
+
+LambdaJam=
+	2850
+	~	 [1500,3000,50]
+	~	Baseline is 2850
+	|
+
+Local Government Funding=
+	Total Local Sales Tax Revenue * Frac Sales Tax Revenue to Transit
+	~	
+	~		|
+
+ModeShare Drive=
+	ModeShare Drive UnNormalized/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+ModeShare Drive UnNormalized=
+	MPS Drive Commercial+MPS Drive ErrandEscort+MPS Drive Home+MPS Drive SocRec+MPS Drive WorkSchool
+	~	
+	~		|
+
+ModeShare NMT=
+	ModeShare NMT UnNormalized/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+"ModeShare Total (for Normalization)"=
+	SIMULTANEOUS(ModeShare Drive UnNormalized+ModeShare NMT UnNormalized+ModeShare Transit UnNormalized\
+		, 1)
+	~	
+	~		|
+
+ModeShare Transit=
+	ModeShare Transit UnNormalized/"ModeShare Total (for Normalization)"
+	~	
+	~		|
+
+Nominal Roadway Flow Speed=
+	IF THEN ELSE( Vehicle Density <= Roadway Critical Density, "Roadway Free-Flow Reference Speed"\
+		 * (1 - EXP( -(LambdaJam / "Roadway Free-Flow Reference Speed") * (1/Vehicle Density\
+		 - 1/Roadway Critical Density))) , 0 )
+	~	
+	~		|
+
+"NumTrips (Drive)"=
+	Uneven Spatial Distribution * Uneven Temporal Distribution * ("NumTrips (AllModes)" \
+		* ModeShare Drive) 
+	+ (Transit Overflow Trips * Frac TrOverflow as Drive Trips)
+	~	
+	~		|
+
+"NumTrips (NMT)"=
+	Uneven Spatial Distribution * Uneven Temporal Distribution * ("NumTrips (AllModes)" \
+		* ModeShare NMT)
+	+ (Transit Overflow Trips * (1 - Frac TrOverflow as Drive Trips))
+	~	
+	~		~	:SUPPLEMENTARY 
+	|
+
+"NumTrips (Transit)"=
+	Uneven Spatial Distribution * Uneven Temporal Distribution * "NumTrips (AllModes)" *\
+		 ModeShare Transit
+	~	
+	~		|
+
+"NumVehicles (Drive)"=
+	"NumTrips (Drive)"/"Avg NumTrips(Pax) per Drive Vehicle"
+	~	
+	~		|
+
+OE per VRM=
+	20
+	~	 [10,40,0.5]
+	~	Baseline is 20
+	|
+
+OEperVRM LFS=
+	15
+	~	 [10,30,1]
+	~	Baseline is 15
+	|
+
+Perc Retail Sales Tax to Transit=
+	2.3
+	~	 [0,5,0.1]
+	~	Baseline is 2.3
+	|
+
+Perc Total Sales Tax=
+	10.2
+	~	 [0,15,0.1]
+	~	Baseline is 10.2
+	|
+
+Population Growth Rate=
+	1.2
+	~	 [-2,10,0.02]
+	~	Baseline is 1.2
+	|
+
+Previous VRM=
+	DELAY FIXED("Effective Transit Service Capacity (VRM)", TIME STEP , "Baseline Transit Service Capacity (VRM)"\
+		 )
+	~	
+	~		|
+
+PS SocRec Multiplier=
+	0.56
+	~	 [0.4,1,0.01]
+	~	Baseline is 0.58
+	|
+
+PS WorkSchool UnNormalized=
+	MPS Drive WorkSchool+MPS NMT WorkSchool+MPS Transit WorkSchool
+	~	
+	~		|
+
+PurposeShare Commercial=
+	PurposeShare Commercial UnNormalized/"PurposeShare Total (for Normalization)"
+	~	
+	~		|
+
+PurposeShare Commercial UnNormalized=
+	MPS Drive Commercial+MPS NMT Commercial+MPS Transit Commercial
+	~	
+	~		|
+
+PurposeShare ErrandEscort=
+	PurposeShare ErrandEscort UnNormalized/"PurposeShare Total (for Normalization)"
+	~	
+	~		~	:SUPPLEMENTARY 
+	|
+
+PurposeShare ErrandEscort UnNormalized=
+	MPS Drive ErrandEscort+MPS NMT ErrandEscort+MPS Transit ErrandEscort
+	~	
+	~		|
+
+PurposeShare Home=
+	PurposeShare Home UnNormalized/"PurposeShare Total (for Normalization)"
+	~	
+	~		~	:SUPPLEMENTARY 
+	|
+
+PurposeShare Home UnNormalized=
+	MPS Drive Home+MPS NMT Home+MPS Transit Home
+	~	
+	~		|
+
+PurposeShare SocRec=
+	PurposeShare SocRec UnNormalized/"PurposeShare Total (for Normalization)"
+	~	
+	~		|
+
+PurposeShare SocRec UnNormalized=
+	MPS Drive SocRec+MPS NMT SocRec+MPS Transit SocRec
+	~	
+	~		|
+
+"PurposeShare Total (for Normalization)"=
+	PS WorkSchool UnNormalized+PurposeShare Commercial UnNormalized+PurposeShare ErrandEscort UnNormalized\
+		+PurposeShare Home UnNormalized+PurposeShare SocRec UnNormalized
+	~	
+	~		|
+
+PurposeShare WorkSchool=
+	PS WorkSchool UnNormalized/"PurposeShare Total (for Normalization)"
+	~	
+	~		~	:SUPPLEMENTARY 
+	|
+
+Roadway Critical Density=
+	190
+	~	 [150,300,10]
+	~	Baseline is 190
+	|
+
+"Roadway Free-Flow Reference Speed"=
+	25
+	~	 [20,60,1]
+	~	Baseline is 25
+	|
+
+Roadway LaneMiles with ASU Calming=
+	ASU Total LaneMiles * (1 - Frac ASU Removing Travel Lane)
+	~	
+	~		|
+
+"Sens PD-N MS-NMT"=
+	20
+	~	 [10,50,1]
+	~	Baseline is 20
+	|
+
+"Sens-MPS-T-H TQR"=
+	5
+	~	 [1,8,0.1]
+	~	Baseline is 5
+	|
+
+"SensFracBusInTransitLane ASU-Transit"=
+	0.02
+	~	 [0.005,0.2,0.005]
+	~	Baseline is 0.02
+	|
+
+"SensMPS-D-C Congestion"=
+	-5
+	~	 [-8,-1,0.1]
+	~	Baseline is -5
+	|
+
+"SensMPS-D-EE Congestion"=
+	-5
+	~	 [-8,-1,0.1]
+	~	Baseline is -5
+	|
+
+"SensMPS-D-H Congestion"=
+	-4
+	~	 [-8,-1,0.1]
+	~	Baseline is -4
+	|
+
+"SensMPS-D-SR Congestion"=
+	-5
+	~	 [-8,-1,0.1]
+	~	Baseline is -5
+	|
+
+"SensMPS-D-WS Congestion"=
+	-6
+	~	 [-8,-1,0.1]
+	~	Baseline is -6
+	|
+
+"SensMPS-N-C ASU-Commercial"=
+	0.08
+	~	 [0.01,2,0.01]
+	~	Baseline is 0.08
+	|
+
+"SensMPS-N-C ASU-NMT"=
+	0.02
+	~	 [0.02,1,0.01]
+	~	Baseline is 0.02
+	|
+
+"SensMPS-N-C Congestion"=
+	0.5
+	~	 [0.2,2,0.05]
+	~	Baseline is 0.5
+	|
+
+"SensMPS-N-EE ASU-Commercial"=
+	0.08
+	~	 [0.01,2,0.01]
+	~	Baseline is 0.08
+	|
+
+"SensMPS-N-EE ASU-NMT"=
+	0.02
+	~	 [0.01,1,0.01]
+	~	Baseline is 0.02
+	|
+
+"SensMPS-N-EE ASU-SocRec"=
+	0.2
+	~	 [0.02,4,0.01]
+	~	Baseline is 0.2
+	|
+
+"SensMPS-N-EE Congestion"=
+	0.5
+	~	 [0.2,2,0.05]
+	~	Baseline is 0.5
+	|
+
+"SensMPS-N-H ASU-NMT"=
+	0.01
+	~	 [0.01,0.8,0.01]
+	~	Baseline is 0.01
+	|
+
+Transit Operating Revenue=
+	Federal and State Grants+Local Government Funding+Total Fare Revenue
+	~	
+	~		|
+
+"SensMPS-N-SR ASU-NMT"=
+	0.02
+	~	 [0.01,1,0.01]
+	~	Baseline is 0.02
+	|
+
+"SensMPS-N-SR ASU-SocRec"=
+	0.2
+	~	 [0.2,4,0.05]
+	~	Baseline is 0.2
+	|
+
+"SensMPS-N-SR Congestion"=
+	0.5
+	~	 [0.2,2,0.05]
+	~	Baseline is 0.5
+	|
+
+"SensMPS-N-WS ASU-NMT"=
+	0.01
+	~	 [0.01,0.8,0.01]
+	~	Baseline is 0.01
+	|
+
+"SensMPS-N-WS Congestion"=
+	0.5
+	~	 [0.2,2,0.05]
+	~	Baseline is 0.5
+	|
+
+"SensMPS-T-C ASU-Commercial"=
+	0.3
+	~	 [0.05,1,0.05]
+	~	Baseline is 0.3
+	|
+
+"SensMPS-T-C Congestion"=
+	1
+	~	 [1,5,0.1]
+	~	Baseline is 1
+	|
+
+"SensMPS-T-C TQR"=
+	5
+	~	 [1,8,0.1]
+	~	Baseline is 5
+	|
+
+"SensMPS-T-C VRM"=
+	1e-06
+	~	 [1e-06,8e-06,1e-07]
+	~	Baseline is 0.000001 (1e-6)
+	|
+
+"SensMPS-T-EE Congestion"=
+	1
+	~	 [1,5,0.1]
+	~	Baseline is 1
+	|
+
+"SensMPS-T-EE TQR"=
+	5
+	~	 [1,8,0.1]
+	~	Baseline is 5
+	|
+
+"SensMPS-T-EE VRM"=
+	1e-06
+	~	 [1e-06,8e-06,1e-07]
+	~	Baseline is 0.000001 (1e-6)
+	|
+
+"SensMPS-T-H Congestion"=
+	1
+	~	 [1,5,0.1]
+	~	Baseline is 1
+	|
+
+"SensMPS-T-H VRM"=
+	1e-06
+	~	 [1e-06,8e-06,1e-07]
+	~	Baseline is 0.000001 (1e-6)
+	|
+
+"SensMPS-T-SR ASU-SocRec"=
+	1
+	~	 [0.5,10,0.1]
+	~	Baseline is 1
+	|
+
+"SensMPS-T-SR Congestion"=
+	1
+	~	 [1,5,0.1]
+	~	Baseline is 1
+	|
+
+"SensMPS-T-SR TQR"=
+	5
+	~	 [1,8,0.1]
+	~	Baseline is 5
+	|
+
+"SensMPS-T-SR VRM"=
+	1e-06
+	~	 [1e-06,8e-06,1e-07]
+	~	Baseline is 0.000001 (1e-6)
+	|
+
+"SensMPS-T-WS Congestion"=
+	1
+	~	 [1,5,0.1]
+	~	Baseline is 1
+	|
+
+"SensMPS-T-WS TQR"=
+	5
+	~	 [1,8,0.1]
+	~	Baseline is 5
+	|
+
+"SensMPS-T-WS VRM"=
+	1e-06
+	~	 [1e-06,8e-06,1e-07]
+	~	Baseline is 0.000001 (1e-6)
+	|
+
+"SensPD-C ASU-Commercial"=
+	-0.5
+	~	 [-2,-0.1,0.05]
+	~	Baseline is -0.5
+	|
+
+"SensPD-C Congestion"=
+	-3
+	~	 [-8,-1,0.1]
+	~		|
+
+"SensPD-C PS-Commercial"=
+	20
+	~	 [5,50,1]
+	~	Baseline is 20
+	|
+
+"SensPD-N ASU-NMT"=
+	-0.2
+	~	 [-1,-0.08,0.02]
+	~	Baseline is -0.2
+	|
+
+Transit Overflow Trips=
+	MAX("NumTrips (Transit)" - "Effective Transit Service Capacity (Trips)", 0)
+	~	
+	~		|
+
+"SensPD-N MS-Transit"=
+	10
+	~	 [1,40,1]
+	~	Baseline is 10
+	|
+
+"SensPD-SR ASU-SocRec"=
+	-3
+	~	 [-10,-0.1,0.1]
+	~	Baseline is -3
+	|
+
+"SensPD-SR Congestion"=
+	-3
+	~	 [-8,-1,0.1]
+	~		|
+
+"SensPD-SR PS-SocRec"=
+	30
+	~	 [10,50,1]
+	~	Baseline is 30
+	|
+
+"SensPD-T ASU-Transit"=
+	-0.01
+	~	 [-0.08,-0.005,0.001]
+	~	Baseline is -0.01
+	|
+
+"SensPD-T Congestion"=
+	-6
+	~	 [-10,-2,0.1]
+	~		|
+
+"SensPD-T MS-NMT"=
+	10
+	~	 [1,40,1]
+	~	Baseline is 10
+	|
+
+"SensPD-T MS-Transit"=
+	20
+	~	 [10,50,1]
+	~	Baseline is 20
+	|
+
+"SensPD-T TQR"=
+	3
+	~	 [1,8,0.1]
+	~	Baseline is 3
+	|
+
+"SensTQR-ASUTransit"=
+	0.05
+	~	 [0.01,0.08,0.005]
+	~	Baseline is 0.05
+	|
+
+"SensTQR-Congestion"=
+	-3
+	~	 [-8,-1,0.1]
+	~	Baseline is -3
+	|
+
+"SensTQR-OE"=
+	0.3
+	~	 [0.1,0.6,0.05]
+	~	Baseline is 0.3
+	|
+
+"SensTQR-VRM"=
+	4e-06
+	~	 [1e-06,8e-06,5e-07]
+	~	Baseline is 0.000004
+	|
+
+CongestionLFS=
+	0
+	~	 [0,1,0.01]
+	~	Baseline is 0
+	|
+
+Total Fare Revenue=
+	"NumTrips (Transit)" * Avg Fare per Transit Trip
+	~	
+	~		|
+
+"Transit Service Capacity Multiplier (TSCM)"=
+	IF THEN ELSE( Transit Capacity Adjustment Pulse Train = 1 , IF THEN ELSE(Transit Occupancy\
+		 > TSCM Upper Threshold, TSCM Increase, IF THEN ELSE(Transit Occupancy < TSCM Lower Threshold\
+		, TSCM Decrease, 1)), 1 )
+	~	
+	~		|
+
+Traffic Calming Factor=
+	0.7
+	~	 [0.5,1,0.05]
+	~		|
+
+Transit Agency Baseline Resources=
+	1e+08
+	~	 [0,1e+09,1e+07]
+	~	Baseline is 100,000,000
+	|
+
+"Transit Agency Operating Resources ($)"= INTEG (
+	Transit Operating Revenue-"Transit Operating Expenses (OE)",
+		Transit Agency Baseline Resources)
+	~	
+	~	From 2021 to 2022, unrestricted net position for KCM grew by 6% or $112 \
+		million (source: King County ACFR 2022, page 32)
+	~	:SUPPLEMENTARY 
+	|
+
+Transit Capacity Adjustment Pulse Train=
+	PULSE TRAIN(Transit Service Capacity Adjustment Interval, TIME STEP , Transit Service Capacity Adjustment Interval\
+		 , FINAL TIME )
+	~	
+	~		|
+
+"Transit Operating Expenses (OE)"=
+	"Effective Transit Service Capacity (VRM)" * OE per VRM
+	~	
+	~		|
+
+Uneven Spatial Distribution=
+	1
+	~	 [0.01,1,0.01]
+	~	Baseline is 0.05 (0.0526 from Jiangbo's paper)
+	|
+
+Uneven Temporal Distribution=
+	1
+	~	 [0.01,1,0.01]
+	~	Baseline is 0.09 (0.0913 from Jiangbo's paper)
+	|
+
+Transit Service Capacity Adjustment Interval=
+	26
+	~	 [13,52,13]
+	~	Baseline is 26
+	|
+
+"Transit Service Capacity Limit (VRM)"=
+	1.25e+06
+	~	 [500000,2.5e+06,50000]
+	~	Baseline is 1,250,000
+	|
+
+TSCM Upper Threshold=
+	0.5
+	~	 [0.4,1,0.02]
+	~	Baseline is 0.5
+	|
+
+TrVRM LFS=
+	"Baseline Transit Service Capacity (VRM)" * TrVRM LFS Fraction of Baseline TrVRM
+	~	
+	~		|
+
+TrVRM LFS Fraction of Baseline TrVRM=
+	0.7
+	~	 [0.4,1,0.05]
+	~	Baseline is 0.7
+	|
+
+TSCM Decrease=
+	0.75
+	~	 [0.5,0.9,0.01]
+	~	Baseline is 0.75
+	|
+
+TSCM Increase=
+	1.25
+	~	 [1.1,1.5,0.01]
+	~	Baseline is 1.25
+	|
+
+TSCM Lower Threshold=
+	0.05
+	~	 [0.05,0.4,0.01]
+	~	Baseline is 0.1
+	|
+
+Vehicle Density=
+	("NumVehicles (Drive)" + "NumVehicles (Transit)") / Effective Roadway LaneMiles
+	~	
+	~		|
+
+Frac Sales Tax Revenue to Transit=
+	Perc Retail Sales Tax to Transit / Perc Total Sales Tax
+	~	
+	~		|
+
+Total Local Sales Tax Revenue=
+	3.8e+06
+	~	 [500000,6e+06,100000]
+	~	Baseline is 3,800,000 (estimate from King County ACFR document)
+	|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 260
+	~	Week
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Week
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	Week [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Week [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Adaptable Street Uses
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,2
+10,1,ASU Commercial LaneMiles,861,84,76,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,ASU NMT LaneMiles,861,297,60,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,ASU SocRec LaneMiles,861,510,60,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,4,48,595,84,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,5,7,4,100,0,0,22,0,192,0,-1--1--1,,1|(645,84)|
+1,6,7,1,4,0,0,22,0,192,0,-1--1--1,,1|(741,84)|
+11,7,0,692,84,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,8,ASU Commercial Construction,692,121,76,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,9,48,1155,84,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,12,1,100,0,0,22,0,192,0,-1--1--1,,1|(982,84)|
+1,11,12,9,4,0,0,22,0,192,0,-1--1--1,,1|(1092,84)|
+11,12,0,1033,84,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,13,ASU Commercial Deterioration,1033,121,76,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,14,48,595,297,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,17,14,100,0,0,22,0,192,0,-1--1--1,,1|(645,297)|
+1,16,17,2,4,0,0,22,0,192,0,-1--1--1,,1|(749,297)|
+11,17,0,692,297,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,18,ASU NMT Construction,692,334,59,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,19,48,1155,297,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,20,22,2,100,0,0,22,0,192,0,-1--1--1,,1|(974,297)|
+1,21,22,19,4,0,0,22,0,192,0,-1--1--1,,1|(1092,297)|
+11,22,0,1033,297,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,23,ASU NMT Deterioration,1033,334,62,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,24,48,595,510,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,27,24,100,0,0,22,0,192,0,-1--1--1,,1|(645,510)|
+1,26,27,3,4,0,0,22,0,192,0,-1--1--1,,1|(749,510)|
+11,27,0,692,510,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,28,ASU SocRec Construction,692,547,59,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,29,48,1155,510,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,30,32,3,100,0,0,22,0,192,0,-1--1--1,,1|(974,510)|
+1,31,32,29,4,0,0,22,0,192,0,-1--1--1,,1|(1092,510)|
+11,32,0,1033,510,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,33,ASU SocRec Deterioration,1033,547,62,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,ASU Commercial Lifespan,1178,187,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,ASU NMT Lifespan,1194,386,43,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,ASU SocRec Lifespan,1201,594,53,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,37,ASU Commercial ConstructionTime,599,187,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,38,ASU NMT ConstructionTime,587,386,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,39,ASU SocRec ConstructionTime,587,594,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,40,48,592,742,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,41,42,40,100,0,0,22,0,192,0,-1--1--1,,1|(642,742)|
+11,42,0,689,742,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,43,ASU Transit Construction,689,779,59,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,44,ASU Transit Lifespan,1225,838,53,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,45,ASU Transit ConstructionTime,584,838,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,46,ASU Commercial FundingCostRatio,437,187,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,47,ASU NMT FundingCostRatio,437,386,43,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,48,ASU SocRec FundingCostRatio,437,594,53,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,49,ASU Transit FundingCostRatio,437,838,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,50,46,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,37,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,52,34,13,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,53,47,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,38,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,35,23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,48,28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,39,28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,58,36,33,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,59,49,43,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,60,45,43,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,61,ASU Transit LaneMiles,872,744,53,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,62,42,61,4,0,0,22,0,192,0,-1--1--1,,1|(757,742)|
+12,63,48,1178,744,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,64,66,61,100,0,0,22,0,192,0,-1--1--1,,1|(982,744)|
+1,65,66,63,4,0,0,22,0,192,0,-1--1--1,,1|(1110,744)|
+11,66,0,1046,744,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,67,ASU Transit Deterioration,1046,781,62,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,68,44,67,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,69,ASU Commercial PublicDemand,437,82,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,70,ASU NMT PublicDemand,437,306,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,71,ASU SocRec PublicDemand,437,517,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,72,ASU Transit PublicDemand,437,746,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,73,69,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,74,70,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,75,71,28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,76,72,43,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,77,ASU Commercial AvgProjectMileage,738,187,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,78,ASU NMT AvgProjectMileage,740,386,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,79,ASU SocRec AvgProjectMileage,734,594,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,80,ASU Transit AvgProjectMileage,735,838,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,81,77,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,82,78,18,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,83,79,28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,84,80,43,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,85,1,13,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,86,2,23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,87,3,33,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,88,61,67,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,89,ASU Commercial BaseLaneMiles,1031,187,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,90,ASU NMT BaseLaneMiles,1043,386,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,91,ASU SocRec BaseLaneMiles,1039,594,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,92,ASU Transit BaseLaneMiles,1050,838,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,93,92,61,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,94,91,3,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,95,90,2,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,96,89,1,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+10,97,"ASU Transit Deterioration On[1]/Off[0]",1148,684,62,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,97,66,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,99,"ASU NMT Deterioration On[1]/Off[0]",1342,234,62,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,100,99,22,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Public Demand
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,ASU Commercial PublicDemand,103,192,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,ASU NMT PublicDemand,784,204,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,ASU SocRec PublicDemand,91,466,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,ASU Transit PublicDemand,792,474,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,Congestion,-90,86,57,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,6,Congestion,592,73,51,10,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,7,Congestion,-88,389,51,10,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,8,Congestion,612,374,51,10,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,9,"SensPD-C Congestion",-90,134,52,29,8,3,1,0,-1,0,0,0,0,0,0,0,0,0
+10,10,"SensPD-N Congestion",592,119,52,29,8,3,1,0,-1,0,0,0,0,0,0,0,0,0
+10,11,"SensPD-SR Congestion",-96,437,52,29,8,3,1,0,-1,0,0,0,0,0,0,0,0,0
+10,12,"SensPD-T Congestion",611,426,52,29,8,3,1,0,-1,0,0,0,0,0,0,0,0,0
+10,13,PurposeShare Commercial,248,90,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,14,ASU Commercial LaneMiles,-89,225,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,ASU NMT LaneMiles,597,212,53,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,ModeShare Transit UnNormalized,907,81,59,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,ModeShare Transit,974,210,59,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,ModeShare NMT,956,80,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,19,PurposeShare SocRec,272,389,57,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,20,ASU SocRec LaneMiles,-86,536,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,21,ModeShare NMT,995,369,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,22,ModeShare Transit,1032,518,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,23,ASU Transit Lifespan,615,514,59,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,24,ASU Transit LaneMiles,532,532,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,25,"Transit Quality and Reliability (TQR)",730,640,73,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,26,"SensPD-C PS-Commercial",248,140,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,"SensPD-C ASU-Commercial",-90,280,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,"Sens PD-N MS-NMT",958,125,48,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,"SensPD-N MS-Transit",973,263,49,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,"SensPD-N ASU-NMT",600,267,45,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,"SensPD-T MS-NMT",993,422,43,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,"SensPD-T MS-Transit",1030,570,49,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,33,"SensPD-T TQR",874,641,43,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,"SensPD-T ASU-Transit",537,582,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,"SensPD-SR PS-SocRec",265,444,49,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,"SensPD-SR ASU-SocRec",-88,589,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,13,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,38,26,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,39,14,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,40,27,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,15,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,42,30,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,43,18,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,44,28,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,45,17,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,46,29,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,47,21,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,48,31,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,49,22,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,50,32,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,25,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,52,33,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,53,24,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,34,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,19,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,35,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,20,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,58,36,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,59,CongestionLFS,226,246,54,15,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,60,CongestionLFS,784,285,54,15,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,61,CongestionLFS,1305,355,54,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,62,CongestionLFS,241,531,54,15,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,63,"ASU-SocRec LFS",151,580,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,64,"ASU-Commercial LFS",166,276,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,65,"ASU-Transit LFS",525,482,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,66,"ASU-NMT LFS",786,110,49,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,67,64,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,68,63,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,69,65,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,70,66,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,71,ModeTransitLFS,1016,634,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,72,71,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,73,ModeNMTLFS,969,333,58,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,74,73,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,75,PurposeSocRecLFS,149,384,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,76,75,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,77,PurposeCommercialLFS,105,72,103,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,78,77,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,79,ModeNMTLFS,888,45,58,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,80,ModeTransitLFS,1045,176,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,81,80,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,82,79,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,83,TQR LFS,661,402,49,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,84,83,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Roadway Traffic
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,75,2
+10,1,Baseline Roadway LaneMiles,926,821,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,Effective Roadway LaneMiles,926,669,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,Vehicle Density,926,506,42,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,"NumTrips (Drive)",1523,504,51,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,"Avg NumTrips(Pax) per Drive Vehicle",1536,644,72,32,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,"NumVehicles (Drive)",1308,505,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,"NumTrips (Transit)",2102,401,51,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,8,"NumVehicles (Transit)",1308,394,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,Frac Buses in TransitLane,1520,86,61,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,4,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,11,5,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,12,9,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,13,6,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,14,8,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,15,2,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,16,Nominal Roadway Flow Speed,767,356,70,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,17,Roadway Critical Density,767,510,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,18,LambdaJam,599,507,56,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,19,17,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,20,18,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,21,3,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,22,"Roadway Free-Flow Reference Speed",1029,355,78,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,23,22,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,24,Aggregate Roadway Flow Speed,769,192,88,37,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,1,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,26,Congestion,1031,191,52,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,27,22,26,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,24,26,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,29,ASU Commercial LaneMiles,357,707,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,30,ASU SocRec LaneMiles,357,860,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,31,ASU NMT LaneMiles,357,783,53,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,32,ASU Total LaneMiles,596,823,47,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,29,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,34,31,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,35,30,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,36,32,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,37,Frac ASU Removing Travel Lane,591,668,75,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,38,37,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,39,ASU Total LaneMiles,343,264,53,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,40,Frac ASU Removing Travel Lane,343,183,75,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,41,Traffic Calming Factor,504,107,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,42,ASU Transit LaneMiles,362,948,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,43,42,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,44,ASU Transit LaneMiles,1696,44,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,45,"ASU-Transit LFS",1696,97,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,46,"SensFracBusInTransitLane ASU-Transit",1708,154,104,40,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,44,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,48,45,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,49,46,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,50,41,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,51,Effective Roadway LaneMiles,498,352,53,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,52,51,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,53,Roadway LaneMiles with ASU Calming,525,227,69,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,54,40,53,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,39,53,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,53,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,16,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,58,FracBusInTrLane MaxLimit,1692,-16,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,59,58,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,60,"Effective Transit Service Capacity (VRM)",1713,233,78,42,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,61,"Effective Transit Service Capacity (Trips)",2294,245,78,42,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,62,Transit Occupancy,1517,313,57,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,63,AvgTripsPerBus,1528,388,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,64,"NumTrips (Transit)",1529,326,51,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,65,64,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,66,63,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,67,FracTransitTripsbyBus,1527,261,61,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,68,67,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Transit Operations
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,90,2
+10,1,"Transit Agency Operating Resources ($)",408,320,93,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,2,48,99,320,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,5,2,100,0,0,22,0,192,0,-1--1--1,,1|(165,320)|
+1,4,5,1,4,0,0,22,0,192,0,-1--1--1,,1|(274,320)|
+11,5,0,227,320,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,6,Transit Operating Revenue,227,357,81,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,7,48,730,320,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,8,10,1,100,0,0,22,0,192,0,-1--1--1,,1|(557,320)|
+1,9,10,7,4,0,0,22,0,192,0,-1--1--1,,1|(672,320)|
+11,10,0,619,320,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,11,"Transit Operating Expenses (OE)",619,357,81,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,"NumTrips (Transit)",-169,575,51,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,13,Avg Fare per Transit Trip,1,575,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,OE per VRM,549,225,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,15,14,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,16,"Effective Transit Service Capacity (VRM)",728,455,74,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,17,16,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,18,Total Local Sales Tax Revenue,159,575,67,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,Frac Sales Tax Revenue to Transit,304,575,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,20,Perc Retail Sales Tax to Transit,245,691,61,30,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,Perc Total Sales Tax,377,691,46,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,20,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,23,21,19,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,24,Federal and State Grants,80,455,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,24,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,26,Total Fare Revenue,-84,455,46,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,Local Government Funding,226,455,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,28,26,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,27,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,30,18,27,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,31,19,27,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,32,13,26,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,33,12,26,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,34,"Baseline Transit Service Capacity (VRM)",728,691,82,31,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,Previous VRM,728,575,57,28,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,"Effective Transit Service Capacity (Trips)",869,321,74,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,37,"Avg Trips(Pax) Capacity per Transit Vehicle",668,201,82,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,38,"Avg Pax-Miles per Trip",868,202,62,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,37,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,40,38,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,16,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,42,16,35,1,0,0,0,0,192,0,-1--1--1,,1|(701,521)|
+10,43,FINAL TIME,896,691,51,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,44,TIME STEP,896,575,58,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,45,"Transit Service Capacity Multiplier (TSCM)",1090,455,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,46,Transit Overflow Trips,1089,101,53,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,36,46,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,48,"NumTrips (Transit)",1280,321,51,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,49,48,46,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,50,Transit Occupancy,1089,322,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,51,36,50,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,52,48,50,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,53,50,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,45,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,55,Transit Service Capacity Adjustment Interval,1090,691,93,35,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,56,Transit Capacity Adjustment Pulse Train,1090,575,81,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,57,55,56,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,58,44,56,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,59,43,56,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,60,56,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,61,44,35,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,62,34,35,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,63,35,16,1,0,0,0,0,192,0,-1--1--1,,1|(753,523)|
+10,64,TSCM Lower Threshold,1346,500,72,28,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,65,TSCM Upper Threshold,1346,382,57,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,66,TSCM Increase,1346,441,42,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,67,TSCM Decrease,1346,559,44,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,68,65,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,69,66,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,70,64,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,71,67,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,72,"Transit Quality and Reliability (TQR)",319,67,75,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,73,14,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,74,"SensTQR-OE",361,226,57,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,75,74,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,76,Congestion,572,67,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,77,"SensTQR-Congestion",572,125,72,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,78,76,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,79,77,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,80,"SensTQR-ASUTransit",45,125,74,24,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,81,80,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,82,"Transit Service Capacity Limit (VRM)",535,454,67,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,83,82,16,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,84,"Effective Transit Service Capacity (VRM)",84,226,78,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,85,"SensTQR-VRM",232,224,56,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,86,84,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,87,85,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,88,ASU Transit LaneMiles,36,58,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,89,88,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,90,CongestionLFS,557,22,54,15,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,91,TrVRM LFS,17,170,59,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,92,"ASU-Transit LFS",40,-6,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,93,OEperVRM LFS,444,228,56,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,94,93,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,95,91,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,96,92,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,97,Transit Agency Baseline Resources,398,459,67,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,98,97,1,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+10,99,Uneven Spatial Distribution,1015,242,75,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,100,Uneven Temporal Distribution,1151,242,87,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,101,"Uneven Transit Spatio-Temporal Distribution",1081,227,76,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,102,101,50,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,103,TQR Multiplier,296,-18,45,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,104,103,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,105,TQR CongestionLFS,550,20,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,106,105,72,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Trip Generation
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,"NumTrips (AllModes)",749,172,49,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,"NumTrips (Drive)",421,283,46,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,"NumTrips (Transit)",749,283,46,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,"NumTrips (NMT)",1055,283,46,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,ModeShare Drive UnNormalized,197,481,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,6,ModeShare Transit UnNormalized,588,473,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,7,ModeShare NMT UnNormalized,995,482,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,8,Population Growth Rate,421,65,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,"Baseline NumTrips (AllModes)",662,60,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,Time,852,59,35,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,11,9,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,12,8,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,13,10,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,14,1,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,15,1,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,16,1,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,17,"ModeShare Total (for Normalization)",755,722,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,18,5,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,19,6,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,20,7,17,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,21,"ModeShare Total (for Normalization)",573,396,83,42,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,22,ModeShare Drive,383,483,79,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,ModeShare Transit,822,479,87,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,ModeShare NMT,1217,481,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,25,17,23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,26,17,22,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,27,17,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,5,22,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,7,24,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,30,6,23,1,0,0,0,0,192,0,-1--1--1,,1|(684,469)|
+1,31,22,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,32,23,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,33,24,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,34,Transit Overflow Trips,203,243,72,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,35,34,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,36,Transit Overflow Trips,1230,243,72,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,37,36,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,38,Frac TrOverflow as Drive Trips,188,314,72,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,39,38,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,40,Frac TrOverflow as Drive Trips,1248,308,78,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,41,40,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,42,Uneven Spatial Distribution,591,300,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,43,Uneven Temporal Distribution,592,372,82,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,44,42,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,45,43,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,46,42,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,47,43,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,48,Uneven Spatial Distribution,908,306,75,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,49,Uneven Temporal Distribution,913,380,87,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,50,48,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,49,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,52,Congestion,1061,197,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,53,Previous Congestion,1103,97,52,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,54,TIME STEP,1103,14,58,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,55,54,53,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,52,53,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,57,Baseline Congestion,1302,97,52,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,58,57,53,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+10,59,TrafficVolume TravelTime Elasticity,977,38,63,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,60,Induced Demand Factor,898,152,59,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,61,59,60,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,62,52,60,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,63,60,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,64,53,60,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*MPS Normalisation
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,MPS Drive Home,179,64,52,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,2,MPS Drive WorkSchool,179,128,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,3,MPS Drive Commercial,179,193,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,4,MPS Drive SocRec,179,257,52,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,MPS Drive ErrandEscort,179,322,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,6,"ModeShare Total (for Normalization)",96,194,83,42,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,7,MPS Drive Home Normalised,377,60,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,8,MPS Drive WorkSchool Normalised,377,124,54,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,MPS Drive Commercial Normalised,377,201,56,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,MPS Drive SocRec Normalised,377,265,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,MPS Drive ErrandEscort Normalised,377,328,60,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,12,1,7,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,13,2,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,14,3,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,15,4,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,16,5,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,17,"ModeShare Total (for Normalization)",723,201,83,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,18,17,7,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,19,17,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,20,17,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,21,17,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,22,17,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,23,MPS NMT Home,1199,72,49,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,24,MPS NMT WorkSchool,1199,140,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,25,MPS NMT Commercial,1199,208,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,26,MPS NMT SocRec,1199,276,49,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,27,MPS NMT ErrandEscort,1199,344,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,28,MPS NMT Home Normalised,1025,55,73,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,MPS NMT WorkSchool Normalised,1025,125,54,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,MPS NMT Commercial Normalised,1025,207,56,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,MPS NMT SocRec Normalised,1025,276,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,MPS NMT ErrandEscort Normalised,1025,345,60,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,23,28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,34,24,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,35,25,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,36,26,31,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,37,27,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,38,17,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,39,17,31,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,40,17,30,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,17,29,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,42,17,28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,43,MPS Transit Home,498,598,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,44,MPS Transit WorkSchool,616,598,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,45,MPS Transit Commercial,734,598,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,46,MPS Transit SocRec,852,598,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,47,MPS Transit ErrandEscort,975,598,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,48,MPS Transit Home Normalised,502,498,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,49,MPS Transit WorkSchool Normalised,630,498,54,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,50,MPS Transit Commercial Normalised,730,498,56,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,51,MPS Transit SocRec Normalised,864,498,88,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,52,MPS Transit ErrandEscort Normalised,1001,498,60,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,43,48,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,44,49,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,45,50,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,46,51,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,47,52,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,58,17,52,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,59,17,51,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,60,17,50,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,61,17,49,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,62,17,48,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*ModeShare (Drive)
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,MPS Drive Home,732,208,47,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,MPS Drive WorkSchool,930,285,58,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,MPS Drive Commercial,844,460,56,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,MPS Drive SocRec,590,457,47,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,ModeShare Drive UnNormalized,733,328,79,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,1,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,7,2,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,8,3,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,9,4,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,10,MPS Drive ErrandEscort,557,283,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,10,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,12,Congestion,1106,254,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,13,"SensMPS-D-WS Congestion",1105,326,77,23,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,Congestion,399,253,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,Congestion,417,436,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,Congestion,1048,444,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,Congestion,669,124,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,"SensMPS-D-H Congestion",807,129,62,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,19,"SensMPS-D-C Congestion",1054,515,63,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,20,"SensMPS-D-SR Congestion",419,509,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,21,"SensMPS-D-EE Congestion",390,320,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,22,17,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,23,18,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,24,12,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,25,13,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,26,16,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,27,19,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,15,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,20,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,30,21,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,31,14,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,32,CongestionLFS,1095,215,54,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,33,32,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,34,CongestionLFS,730,86,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,35,CongestionLFS,291,283,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,36,CongestionLFS,310,470,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,37,CongestionLFS,1042,412,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,38,34,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,39,37,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,40,36,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,35,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,42,PS SocRec Multiplier,590,563,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,43,42,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,44,PS Home Multiplier,886,204,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,45,44,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,46,PS Commercial Multiplier,864,550,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,46,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,48,PS WorkSchool Multiplier,929,361,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,49,PS ErrandEscort Multiplier,541,361,73,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,50,48,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,49,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,52,MS Drive Multiplier,730,431,45,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,53,52,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,52,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,52,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,52,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,52,1,1,0,0,0,0,192,0,-1--1--1,,1|(784,285)|
+10,58,"MPS Drive-EE-Multiplier",533,174,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,59,"MPS Drive-WS-Multiplier",1015,159,85,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,60,58,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,61,59,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,62,"MPS Drive-C-Multiplier",762,626,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,63,62,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,64,"MPS Drive-Home-Multiplier",953,67,87,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,65,64,1,1,0,0,0,0,192,0,-1--1--1,,1|(904,128)|
+10,66,"MPS Drive-SR-Multiplier",448,393,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,67,66,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*ModeShare (Transit)
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,ModeShare Transit UnNormalized,668,88,87,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,MPS Transit Home,688,-64,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,MPS Transit WorkSchool,1035,28,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,MPS Transit Commercial,879,283,56,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,MPS Transit SocRec,581,241,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,2,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,7,3,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,8,4,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,9,5,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,10,MPS Transit ErrandEscort,271,42,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,10,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,12,Congestion,1286,-127,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,13,"Effective Transit Service Capacity (VRM)",1289,1,78,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,14,Congestion,1080,118,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,"Effective Transit Service Capacity (VRM)",1079,249,64,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,Congestion,342,204,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,"Effective Transit Service Capacity (VRM)",346,314,64,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,Congestion,76,-144,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,19,"Effective Transit Service Capacity (VRM)",79,-29,64,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,20,Congestion,345,-182,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,21,"Effective Transit Service Capacity (VRM)",896,-187,64,27,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,22,"SensMPS-T-WS Congestion",1288,-79,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,"SensMPS-T-WS VRM",1289,64,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,"SensMPS-T-C Congestion",1079,162,59,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,"SensMPS-T-C VRM",1082,310,59,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,"SensMPS-T-SR Congestion",342,250,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,"SensMPS-T-SR VRM",344,371,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,"SensMPS-T-EE Congestion",75,-95,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,"SensMPS-T-EE VRM",79,38,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,"SensMPS-T-H Congestion",464,-182,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,"SensMPS-T-H VRM",1025,-185,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,ASU Commercial LaneMiles,788,502,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,33,"SensMPS-T-C ASU-Commercial",937,502,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,"SensMPS-T-SR ASU-SocRec",602,499,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,35,ASU SocRec LaneMiles,493,497,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,36,12,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,37,22,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,38,13,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,39,23,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,40,14,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,24,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,42,15,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,43,25,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,44,33,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,45,32,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,46,34,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,47,35,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,48,27,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,49,17,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,50,26,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,16,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,52,29,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,53,19,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,28,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,18,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,20,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,30,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,58,21,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,59,31,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,60,ASU Transit LaneMiles,617,-173,59,29,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,61,ASU Transit LaneMiles,1302,113,49,18,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,62,ASU Transit LaneMiles,1086,394,49,18,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,63,ASU Transit LaneMiles,344,428,49,18,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,64,ASU Transit LaneMiles,222,83,49,18,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,65,"Transit Quality and Reliability (TQR)",624,-193,73,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,66,"Transit Quality and Reliability (TQR)",1296,123,73,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,67,"Transit Quality and Reliability (TQR)",1074,367,73,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,68,"Transit Quality and Reliability (TQR)",342,419,73,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,69,"Transit Quality and Reliability (TQR)",78,86,73,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,70,"Sens-MPS-T-H TQR",765,-189,63,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,71,"SensMPS-T-WS TQR",1298,178,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,72,"SensMPS-T-C TQR",1069,420,59,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,73,"SensMPS-T-SR TQR",366,483,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,74,"SensMPS-T-EE TQR",78,132,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,75,65,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,76,70,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,77,66,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,78,71,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,79,67,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,80,72,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,81,68,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,82,73,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,83,69,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,84,74,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,85,CongestionLFS,1285,-162,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,86,CongestionLFS,368,-136,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,87,CongestionLFS,100,-168,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,88,CongestionLFS,1013,99,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,89,CongestionLFS,374,172,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,90,86,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,91,87,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,92,85,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,93,88,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,94,89,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,95,TrVRM LFS,1012,-127,59,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,96,TrVRM LFS,910,-41,53,10,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,97,TrVRM LFS,1202,-176,53,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,98,TrVRM LFS,921,122,53,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,99,TrVRM LFS,440,145,53,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,100,TrVRM LFS,75,171,53,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,101,95,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,102,97,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,103,98,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,104,99,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,105,100,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,106,"ASU-Commercial LFS",1088,500,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,107,"ASU-SocRec LFS",681,435,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,108,107,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,109,106,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,110,PS SocRec Multiplier,734,298,86,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,111,110,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,112,PS Home Multiplier,891,-46,85,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,113,112,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,114,PS Commercial Multiplier,732,343,74,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,115,114,4,1,0,0,0,0,192,0,-1--1--1,,1|(820,331)|
+10,116,MS Transit Multiplier,708,236,49,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,117,Avg Fare per Transit Trip,911,-267,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,118,"Sens MS-T TransitFare",1028,-273,53,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,119,"MS-T TransitFareLFS",947,-327,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,120,TQR LFS,704,-229,49,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,121,TQR LFS,1410,29,49,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,122,TQR LFS,1190,339,49,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,123,TQR LFS,245,458,49,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,124,TQR LFS,-26,52,49,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,125,120,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,126,121,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,127,122,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,128,123,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,129,124,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,130,ASU Transit LaneMiles,709,-282,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,131,"SensMS-T ASU-Transit",596,-271,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,132,"ASU-Transit LFS",503,-254,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,133,ASU SocRec LaneMiles,108,224,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,134,"SensMPS-T-SR ASU-SocRec",134,277,69,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,135,"ASU-SocRec LFS",149,330,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,136,133,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,137,134,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,138,135,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,139,ASU Commercial LaneMiles,154,-196,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,140,"SensMPS-T-C ASU-Commercial",185,-249,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,141,"ASU-Commercial LFS",239,-279,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,142,139,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,143,140,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,144,141,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,145,132,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,146,131,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,147,130,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,148,117,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,149,119,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,150,118,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,151,"ASU-Transit LFS",1285,-243,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,152,"SensMS-T ASU-Transit",1397,-210,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,153,ASU Transit LaneMiles,1397,-152,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,154,"MS-T TransitFareLFS",1432,105,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,155,"Sens MS-T TransitFare",1433,151,58,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,156,Avg Fare per Transit Trip,1432,203,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,157,151,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,158,152,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,159,153,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,160,154,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,161,155,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,162,156,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,163,ASU Transit LaneMiles,1287,289,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,164,"SensMS-T ASU-Transit",1287,331,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,165,"ASU-Transit LFS",1287,375,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,166,Avg Fare per Transit Trip,1063,543,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,167,"Sens MS-T TransitFare",928,545,58,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,168,"MS-T TransitFareLFS",807,549,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,169,166,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,170,167,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,171,168,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,172,163,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,173,164,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,174,165,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,175,ASU Transit LaneMiles,596,551,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,176,"SensMS-T ASU-Transit",491,549,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,177,"ASU-Transit LFS",345,545,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,178,Avg Fare per Transit Trip,207,521,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,179,"Sens MS-T TransitFare",155,457,58,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,180,"MS-T TransitFareLFS",179,411,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,181,175,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,182,176,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,183,177,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,184,178,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,185,179,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,186,180,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,187,Avg Fare per Transit Trip,15,-255,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,188,"MS-T TransitFareLFS",-25,-206,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,189,"Sens MS-T TransitFare",-60,-145,58,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,190,ASU Transit LaneMiles,-81,126,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,191,"SensMS-T ASU-Transit",-74,178,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,192,"ASU-Transit LFS",-61,228,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,193,187,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,194,188,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,195,189,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,196,190,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,197,191,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,198,192,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,199,116,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,200,116,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,201,116,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,202,116,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,203,116,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,204,PS ErrandEscort Multiplier,356,-36,79,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,205,PS WorkSchool Multiplier,872,13,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,206,205,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,207,204,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,208,"MPS Transit-WS-Multiplier",1013,-84,87,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,209,"MPS Transit-SR-Multiplier",689,611,84,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,210,208,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,211,209,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,212,"MPS Transit-EE-Multiplier",455,17,84,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,213,"MPS Transit-Home-Multiplier",512,-43,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,214,213,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,215,212,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,216,"MPS Transit-C-Multiplier",882,617,87,33,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,217,216,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*ModeShare (NMT)
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,ModeShare NMT UnNormalized,724,146,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,MPS NMT Home,724,32,44,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,MPS NMT WorkSchool,922,107,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,MPS NMT Commercial,887,348,56,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,MPS NMT SocRec,597,345,44,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,6,2,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,7,3,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,8,4,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,9,5,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,10,MPS NMT ErrandEscort,537,107,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,11,10,1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,12,Congestion,1094,33,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,13,ASU NMT LaneMiles,1094,151,53,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,14,Congestion,1097,349,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,ASU NMT LaneMiles,1097,467,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,Congestion,321,346,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,ASU NMT LaneMiles,321,464,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,Congestion,348,-69,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,19,ASU NMT LaneMiles,348,21,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,20,Congestion,575,-98,51,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,21,ASU NMT LaneMiles,782,-99,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,22,"SensMPS-N-WS Congestion",1095,79,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,23,"SensMPS-N-WS ASU-NMT",1097,199,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,24,"SensMPS-N-C Congestion",1101,393,61,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,25,"SensMPS-N-C ASU-NMT",1098,515,61,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,26,"SensMPS-N-SR Congestion",322,390,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,27,"SensMPS-N-SR ASU-NMT",320,516,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,28,"SensMPS-N-EE Congestion",348,-27,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,29,"SensMPS-N-EE ASU-NMT",348,69,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,30,"SensMPS-N-H Congestion",669,-101,62,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,31,"SensMPS-N-H ASU-NMT",884,-96,62,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,32,ASU Commercial LaneMiles,824,521,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,33,"SensMPS-N-C ASU-Commercial",958,521,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,34,ASU SocRec LaneMiles,456,518,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,35,"SensMPS-N-SR ASU-SocRec",574,520,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,36,ASU SocRec LaneMiles,348,233,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,37,ASU Commercial LaneMiles,348,131,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,38,"SensMPS-N-EE ASU-Commercial",348,180,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,39,"SensMPS-N-EE ASU-SocRec",348,285,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,40,20,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,30,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,42,21,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,43,31,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,44,12,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,45,22,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,46,13,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,47,23,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,48,14,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,49,24,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,50,15,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,25,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,52,33,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,53,32,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,35,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,34,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,27,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,57,17,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,58,26,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,59,16,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,60,39,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,61,36,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,62,38,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,63,37,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,64,29,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,65,19,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,66,28,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,67,18,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,68,CongestionLFS,728,-138,54,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,69,CongestionLFS,1064,8,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,70,CongestionLFS,1072,322,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,71,CongestionLFS,367,320,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,72,CongestionLFS,390,-91,47,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,73,"ASU-NMT LFS",996,225,49,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,74,"ASU-NMT LFS",1079,563,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,75,"ASU-NMT LFS",358,567,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,76,"ASU-NMT LFS",601,39,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,77,76,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,78,75,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,79,74,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,80,73,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,81,"ASU-NMT LFS",977,-76,43,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,82,81,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,83,"ASU-Commercial LFS",894,569,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,84,83,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,85,"ASU-Commercial LFS",576,191,70,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,86,85,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,87,"ASU-SocRec LFS",653,566,59,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,88,"ASU-SocRec LFS",487,235,55,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,89,87,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,90,88,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,91,PS SocRec Multiplier,710,457,86,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,92,91,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,93,PS Home Multiplier,909,27,85,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,94,93,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,95,MS NMT Multiplier,866,225,45,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,96,PS Commercial Multiplier,729,378,74,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,97,96,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,98,68,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,99,69,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,100,70,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,101,71,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,102,72,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,103,95,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,104,95,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,105,95,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,106,95,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,107,95,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,108,PS ErrandEscort Multiplier,542,-11,79,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,109,PS WorkSchool Multiplier,1326,112,73,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,110,109,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,111,108,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,112,"MPS NMT-EE-Multiplier",486,-138,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,113,112,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,114,"MPS NMT-SR-Multiplier",479,575,83,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,115,114,5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,116,"MPS NMT-Home-Multiplier",1087,-61,87,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,117,116,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,118,"MPS NMT-C-Multiplier",1169,290,78,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,119,118,4,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,120,"MPS NMT-WS-Multiplier",1324,170,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,121,120,3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*PurposeShare
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,MPS Drive WorkSchool,527,76,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,2,PS WorkSchool UnNormalized,663,176,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,3,1,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,4,MPS Transit WorkSchool,662,76,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,5,MPS NMT WorkSchool,826,78,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,6,4,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,7,5,2,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,8,PurposeShare Home UnNormalized,156,252,67,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,9,PurposeShare Commercial UnNormalized,1186,207,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,10,PurposeShare SocRec UnNormalized,306,443,67,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,11,PurposeShare ErrandEscort UnNormalized,927,449,73,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,MPS Drive Home,21,113,52,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,13,MPS Transit Home,170,120,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,14,MPS NMT Home,320,122,49,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,15,MPS Drive Commercial,1044,90,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,16,MPS Transit Commercial,1191,89,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,17,MPS NMT Commercial,1334,90,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,18,MPS Drive SocRec,165,549,52,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,19,MPS Transit SocRec,304,554,60,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,20,MPS NMT SocRec,477,556,49,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,21,MPS Drive ErrandEscort,757,549,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,22,MPS Transit ErrandEscort,920,562,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,23,MPS NMT ErrandEscort,1122,560,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,24,12,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,25,13,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,26,14,8,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,27,15,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,16,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,17,9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,30,18,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,31,19,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,32,20,10,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,33,21,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,34,22,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,35,23,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,36,"PurposeShare Total (for Normalization)",667,336,68,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,37,10,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,38,11,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,39,9,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,40,2,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,41,8,36,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,42,PurposeShare Home,340,249,65,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,43,PurposeShare WorkSchool,849,180,65,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,44,PurposeShare Commercial,1378,211,65,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,45,PurposeShare ErrandEscort,1144,451,65,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,46,PurposeShare SocRec,494,447,65,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,47,36,42,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,48,8,42,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,49,2,43,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,50,36,43,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,51,36,44,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,52,9,44,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,53,36,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,54,11,45,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,55,36,46,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,56,10,46,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Logistic Function Variables
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,CongestionLFS,245,102,43,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,"ASU-Commercial LFS",558,110,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,"ASU-NMT LFS",558,198,61,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,"ASU-SocRec LFS",558,291,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,"ASU-Transit LFS",558,388,54,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,TrVRM LFS,851,108,48,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,7,"Baseline Transit Service Capacity (VRM)",1117,114,79,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,8,7,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,9,TrVRM LFS Fraction of Baseline TrVRM,1110,208,87,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,10,9,6,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,11,OEperVRM LFS,863,299,50,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,ModeTransitLFS,243,192,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,ModeNMTLFS,258,282,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,PurposeSocRecLFS,252,369,68,28,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,PurposeCommercialLFS,278,426,90,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,16,TQR LFS,268,509,42,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*VMT Calculations
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,2
+10,1,"D-WS Med-Trip-Miles",386,182,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,2,"D-C Med-Trip-Miles",386,316,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,3,"D-SR Med-Trip-Miles",386,450,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,4,"D-EE Med-Trip-Miles",386,558,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,5,"D-H Med-Trip-Miles",386,74,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,6,MPS Drive Home Normalised,386,128,82,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,7,MPS Drive WorkSchool Normalised,386,249,59,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,8,MPS Drive Commercial Normalised,386,383,59,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,9,MPS Drive SocRec Normalised,386,504,86,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,10,MPS Drive ErrandEscort Normalised,386,625,60,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,11,"D-H VMT",572,120,42,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,12,"D-WS VMT",572,224,47,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,13,"D-C VMT",572,356,42,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,14,"D-SR VMT",572,491,44,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,15,"D-EE VMT",572,591,44,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,16,5,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,17,6,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,18,1,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,19,7,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,20,2,13,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,21,8,13,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,22,3,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,23,9,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,24,4,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,25,10,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,26,"NumTrips (AllModes)",854,225,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,27,26,11,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,28,26,12,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,29,26,13,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,30,26,14,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,31,26,15,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,32,Total Drive VMT,853,492,50,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,33,11,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,34,12,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,35,13,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,36,14,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,37,15,32,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,38,Drive VMT per Capita,1064,486,49,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,39,Regional Population,1063,361,50,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,40,Baseline Regional Population,1271,359,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,41,Population Growth Rate,1266,256,64,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,42,Time,1062,248,35,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,43,32,38,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,44,39,38,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,45,40,39,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,46,41,39,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,47,42,39,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Graphs
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,46,2
+12,1,0,629,278,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Commercial LaneMiles,Graph
+12,2,0,1240,278,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU NMT LaneMiles,Graph
+12,3,0,630,689,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU SocRec LaneMiles,Graph
+12,4,0,1240,690,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Transit LaneMiles,Graph
+12,5,0,1846,283,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Congestion,Graph
+12,6,0,1851,692,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+"NumTrips (Drive)",Graph
+12,7,0,2466,282,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+"NumTrips (NMT)",Graph
+12,8,0,2462,689,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+"NumTrips (Transit)",Graph
+12,9,0,628,1112,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare Drive,Graph
+12,10,0,1268,1113,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare NMT,Graph
+12,11,0,1888,1110,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare Transit,Graph
+12,12,0,3078,282,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+"Effective Transit Service Capacity (VRM)",Graph
+12,13,0,3080,694,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Transit Occupancy,Graph
+12,14,0,596,1625,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+PurposeShare Commercial,Graph
+12,15,0,1223,1621,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+PurposeShare Home,Graph
+12,16,0,1840,1622,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+PurposeShare WorkSchool,Graph
+12,17,0,3062,1625,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+PurposeShare ErrandEscort,Graph
+12,18,0,2404,943,197,44,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Commercial FundingCostRatio,0,0,0
+12,19,0,2404,1004,195,49,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU NMT FundingCostRatio,0,0,0
+12,20,0,2404,1088,196,42,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU SocRec FundingCostRatio,0,0,0
+12,21,0,2404,1157,199,50,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Transit FundingCostRatio,0,0,0
+12,22,0,2851,943,184,48,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Commercial AvgProjectMileage,0,0,0
+12,23,0,2851,1003,195,50,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU NMT AvgProjectMileage,0,0,0
+12,24,0,2851,1084,204,44,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU SocRec AvgProjectMileage,0,0,0
+12,25,0,2851,1163,212,50,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Transit AvgProjectMileage,0,0,0
+12,26,0,3300,943,202,52,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+Avg Fare per Transit Trip,0,0,0
+12,27,0,3300,1012,204,53,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+Frac ASU Removing Travel Lane,0,0,0
+12,28,0,3300,1094,204,44,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"Avg NumTrips(Pax) per Drive Vehicle",0,0,0
+12,29,0,3300,1170,195,53,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"Roadway Free-Flow Reference Speed",0,0,0
+12,30,0,3300,1265,204,47,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"Avg Pax-Miles per Trip",0,0,0
+12,31,0,3300,1342,210,40,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"Avg Trips(Pax) Capacity per Transit Vehicle",0,0,0
+12,32,0,2620,1250,192,41,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+TSCM Upper Threshold,0,0,0
+12,33,0,2629,1328,185,40,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"Transit Service Capacity Limit (VRM)",0,0,0
+12,34,0,3718,670,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+"Transit Quality and Reliability (TQR)",Graph
+12,35,0,3653,981,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+OE per VRM,0,0,0
+12,36,0,3787,1116,223,39,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Commercial ConstructionTime,0,0,0
+12,37,0,3789,1193,229,46,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU NMT ConstructionTime,0,0,0
+12,38,0,3791,1268,224,48,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU SocRec ConstructionTime,0,0,0
+12,39,0,3797,1343,231,38,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Transit ConstructionTime,0,0,0
+12,40,0,3606,1420,221,46,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Commercial Lifespan,0,0,0
+12,41,0,3605,1479,225,47,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU NMT Lifespan,0,0,0
+12,42,0,3609,1536,226,48,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU SocRec Lifespan,0,0,0
+12,43,0,3614,1610,234,43,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Transit Lifespan,0,0,0
+12,44,0,4057,1416,188,45,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+Miles,0,0,0
+12,45,0,4055,1486,188,41,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0
+12,46,0,4066,1528,205,49,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0
+12,47,0,4077,1599,213,49,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+,0,0,0
+12,48,0,3649,72,240,58,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+CongestionLFS,0,0,0
+12,49,0,3646,161,245,53,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+MS NMT Multiplier,0,0,0
+12,50,0,3675,262,272,50,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+MS Transit Multiplier,0,0,0
+12,51,0,3700,376,284,60,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+TQR Multiplier,0,0,0
+12,52,0,3913,985,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+FracBusInTrLane MaxLimit,0,0,0
+12,53,0,855,1894,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS Commercial Multiplier,0,0,0
+12,54,0,1228,1896,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS Home Multiplier,0,0,0
+12,55,0,1676,1943,80,65,0,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS SocRec Multiplier,0,0,0
+12,56,0,14,684,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Total Drive VMT,Graph
+12,57,0,7,1114,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Drive VMT per Capita,Graph
+12,58,0,2264,-15,443,62,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+Uneven Temporal Distribution,0,0,0
+12,59,0,1414,-25,339,72,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+Uneven Spatial Distribution,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Graphs-2
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,63,2
+12,1,0,131,-3524,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Commercial LaneMiles,Graph
+12,2,0,736,-3524,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU SocRec LaneMiles,Graph
+12,3,0,736,-3119,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Congestion,Graph
+12,4,0,381,-2200,241,55,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Commercial FundingCostRatio,0,0,0
+12,5,0,374,-2039,248,58,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU SocRec FundingCostRatio,0,0,0
+12,6,0,119,-2508,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+PurposeShare Commercial,Graph
+12,7,0,723,-2508,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+PurposeShare SocRec,Graph
+12,8,0,2123,-2766,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare NMT,Graph
+12,9,0,1517,-2766,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare Drive,Graph
+12,10,0,-899,-2845,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Congestion,Graph
+12,11,0,232,577,560,381,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+Congestion,Graph
+12,12,0,801,-235,375,386,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare NMT,Graph
+12,13,0,1557,-235,376,387,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare Transit,Graph
+12,14,0,131,-3119,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU NMT LaneMiles,Graph
+12,15,0,2730,-2766,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare Transit,Graph
+12,16,0,1366,577,568,381,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+Total Drive VMT,Graph
+12,17,0,45,-235,374,386,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ModeShare Drive,Graph
+12,18,0,317,-1566,507,308,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Commercial LaneMiles,Graph
+12,19,0,1339,-1565,506,308,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU SocRec LaneMiles,Graph
+12,20,0,318,-951,507,299,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU NMT LaneMiles,Graph
+12,21,0,1339,-950,506,299,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Transit LaneMiles,Graph
+12,22,0,1235,2998,798,220,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Commercial LaneMiles,Graph
+12,23,0,1236,2552,798,220,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+ASU Commercial PublicDemand,Graph
+12,24,0,1293,-2200,273,65,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU NMT FundingCostRatio,0,0,0
+12,25,0,1292,-2040,267,57,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU Transit FundingCostRatio,0,0,0
+12,26,0,1580,1011,368,53,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+ASU NMT FundingCostRatio,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Multiplier Tuning
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,67,2
+12,1,0,-1650,290,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Drive Commercial Normalised,Graph
+12,2,0,-1048,288,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Drive ErrandEscort Normalised,Graph
+12,3,0,-446,288,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Drive Home Normalised,Graph
+12,4,0,157,288,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Drive WorkSchool Normalised,Graph
+12,5,0,760,288,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Drive SocRec Normalised,Graph
+12,6,0,-1656,699,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS NMT Commercial Normalised,Graph
+12,7,0,-1054,700,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS NMT ErrandEscort Normalised,Graph
+12,8,0,-444,699,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS NMT Home Normalised,Graph
+12,9,0,160,697,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS NMT WorkSchool Normalised,Graph
+12,10,0,764,699,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS NMT SocRec Normalised,Graph
+12,11,0,-1656,1104,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Transit Commercial Normalised,Graph
+12,12,0,-1052,1106,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Transit ErrandEscort Normalised,Graph
+12,13,0,-446,1103,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Transit Home Normalised,Graph
+12,14,0,160,1103,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Transit WorkSchool Normalised,Graph
+12,15,0,767,1109,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+MPS Transit SocRec Normalised,Graph
+12,16,0,-1671,1386,277,68,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+MS NMT Multiplier,0,0,0
+12,17,0,-1070,1387,272,63,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+MS Transit Multiplier,0,0,0
+12,18,0,-450,1386,280,61,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS Commercial Multiplier,0,0,0
+12,19,0,771,1386,294,61,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS Home Multiplier,0,0,0
+12,20,0,597,1532,289,64,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS SocRec Multiplier,0,0,0
+12,21,0,-1354,1513,328,61,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+MS Drive Multiplier,0,0,0
+12,22,0,151,1380,287,65,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS ErrandEscort Multiplier,0,0,0
+12,23,0,-173,1526,348,70,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+PS WorkSchool Multiplier,0,0,0
+12,24,0,1312,704,191,50,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS NMT-EE-Multiplier",0,0,0
+12,25,0,1312,980,196,35,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS NMT-SR-Multiplier",0,0,0
+12,26,0,1334,1411,206,42,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Transit-WS-Multiplier",0,0,0
+12,27,0,1334,1490,204,38,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Transit-SR-Multiplier",0,0,0
+12,28,0,1331,168,213,41,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Drive-EE-Multiplier",0,0,0
+12,29,0,1331,367,209,40,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Drive-WS-Multiplier",0,0,0
+12,30,0,1312,789,202,46,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS NMT-Home-Multiplier",0,0,0
+12,31,0,1334,1224,205,40,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Transit-EE-Multiplier",0,0,0
+12,32,0,1334,1311,196,43,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Transit-Home-Multiplier",0,0,0
+12,33,0,1331,66,195,46,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Drive-C-Multiplier",0,0,0
+12,34,0,1316,620,208,45,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS NMT-C-Multiplier",0,0,0
+12,35,0,2039,309,453,206,8,15,0,0,1,0,0,0,0,0,0,0,0,0
+Drive_MPS_at_Time_Zero
+12,36,0,2038,739,457,200,8,15,0,0,1,0,0,0,0,0,0,0,0,0
+NMT_MPS_at_Time_Zero
+12,37,0,2039,1187,448,199,8,15,0,0,1,0,0,0,0,0,0,0,0,0
+Transit_MPS_at_Time_Zero
+12,38,0,1312,889,199,46,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS NMT-WS-Multiplier",0,0,0
+12,39,0,1331,262,209,43,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Drive-Home-Multiplier",0,0,0
+12,40,0,2036,1497,353,73,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+CongestionLFS,0,0,0
+12,41,0,1331,455,220,38,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Drive-SR-Multiplier",0,0,0
+12,42,0,1334,1124,198,49,8,79,0,0,0,0,0,0,0,0,0,0,0,0
+"MPS Transit-C-Multiplier",0,0,0
+12,43,0,2825,309,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+Congestion,Graph
+///---\\\
+:GRAPH ASU_Lane-Miles_and_Public_Demand
+:TITLE NMT ASU Lane-Miles and Public Demand
+:X-MIN 0
+:X-MAX 104
+:SCALE
+:VAR ASU NMT LaneMiles|NMT ASU Lane-Miles
+:UNITS Lane-Miles
+:DATASET Figure 9.vdfx
+:LINE-WIDTH 1
+:SCALE
+:VAR ASU NMT PublicDemand|NMT ASU Public Demand
+:UNITS Public Demand (From 0 to 1)
+:DATASET Figure 9.vdfx
+:LINE-WIDTH 1
+
+:TABLE Drive_MPS_at_Time_Zero
+:TITLE Drive MPS at Time Zero
+:X-MIN 0
+:X-MAX 0
+:FIRST-CELLWIDTH 200
+:CELLWIDTH 200
+:FONT Vensim Sans|24||0-0-0
+:VAR MPS Drive Commercial Normalised|D-C
+:DATASET 
+:VAR MPS Drive ErrandEscort Normalised|D-EE
+:DATASET 
+:VAR MPS Drive Home Normalised|D-H
+:DATASET 
+:VAR MPS Drive WorkSchool Normalised|D-WS
+:DATASET 
+:VAR MPS Drive SocRec Normalised|D-SR
+:DATASET 
+
+:TABLE NMT_MPS_at_Time_Zero
+:TITLE NMT MPS at Time Zero
+:X-MIN 0
+:X-MAX 0
+:FONT Vensim Sans|24||0-0-0
+:VAR MPS NMT Commercial Normalised|NMT-C
+:DATASET 
+:VAR MPS NMT ErrandEscort Normalised|NMT-EE
+:DATASET 
+:VAR MPS NMT Home Normalised|NMT-H
+:DATASET 
+:VAR MPS NMT WorkSchool Normalised|NMT-WS
+:DATASET 
+:VAR MPS NMT SocRec Normalised|NMT-SR
+:DATASET 
+
+:TABLE Transit_MPS_at_Time_Zero
+:TITLE Transit MPS at Time Zero
+:X-MIN 0
+:X-MAX 0
+:FONT Vensim Sans|24||0-0-0
+:VAR MPS Transit Commercial Normalised|Tr-C
+:DATASET 
+:VAR MPS Transit ErrandEscort Normalised|Tr-EE
+:DATASET 
+:VAR MPS Transit Home Normalised|Tr-H
+:DATASET 
+:VAR MPS Transit WorkSchool Normalised|Tr-WS
+:DATASET 
+:VAR MPS Transit SocRec Normalised|Tr-SR
+:DATASET 
+:L<%^E!@
+1:Perm-FtCR-Mob-20-1.vdfx
+1:Perm-FtCR-Mob-10-0.5.vdfx
+1:Perm-FtCR-Mob-5-0.2.vdfx
+1:Perm-FtCR-Mob-2-0.1.vdfx
+1:Perm-FtCR-Mob-1-0.05.vdfx
+1:Perm-FtCR-Mob-0.5-0.02.vdfx
+1:Perm-FtCR-Mob-0.2-0.01.vdfx
+1:Baseline.vdfx
+4:Time
+5:Aggregate Roadway Flow Speed
+9:Perm-FtCR-NMT-0.3
+19:90,3
+24:0
+25:260
+26:260
+23:0
+18:T5_StockFlow_v7_SensitivityTest_FracBusInTransitLane.vsc
+20:T5_StockFlow_v7_SensitivtyTest_v1_Savelist.lst
+15:0,0,0,0,0,0
+27:0,
+34:0,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:0
+94:0
+92:0
+91:0
+90:0
+87:0
+75:
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
